@@ -42,8 +42,8 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-secondary mr-2">Sign up</button>
-      <button class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#loginModal">Sign in</button>
+      <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#registerModal">Đăng ký</button>
+      <button class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#loginModal">Đăng nhập</button>
       <input class="form-control mr-sm-2" type="search" placeholder="Nhập sản phẩm..." aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
     </form>
@@ -51,44 +51,137 @@
 </nav>
 
 
-
-<!-- Begin login modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Đăng nhập</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post" class="row justify-content-center">
-          <div class="form-group row">
-            <label class="col-md-4 px-auto" for="txtusername">Username: </label>
-            <input class="form-control col-md-7" type="text" name="txtusername" id="txtusername" placeholder="Username">
+  <!-- Begin top slide -->
+  <div class="text-center container mt-5">
+    
+    <div id="slideTop" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="w-100 h-100" src="../image/slide/anh1.jpg" alt="First slide">
+          <div class="carousel-caption d-none d-md-block">
+            <h1>Test</h1>
           </div>
-          
-          <div class="form-group row">
-            <label class="col-md-4 px-auto" for="txtpwd">Password</label>
-            <input class="form-control col-md-7" type="password" name="txtpwd" id="txtpwd" placeholder="Password">
-          </div>
-          
-        </form>
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="../image/slide/anh2.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="../image/slide/anh3.jpg" alt="Third slide">
+        </div>
       </div>
-      <div class="modal-footer">
-        <div class="btn-group text-center mx-auto">
-          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
-          <button type="button" class="btn btn-success">Đăng nhập</button>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <!-- End top slide here -->
+
+
+  <!-- Begin login modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Đăng nhập</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" class="row justify-content-center">
+            <div class="form-group row">
+              <label class="col-md-4 " for="txtusername">Tên tài khoản: </label>
+              <input class="form-control col-md-7" type="text" name="txtusername" id="txtusername" placeholder="Tài khoản">
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-md-4 px-auto" for="txtpwd">Mật khẩu</label>
+              <input class="form-control col-md-7" type="password" name="txtpwd" id="txtpwd" placeholder="Mật khẩu">
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group text-center mx-auto">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
+            <button type="button" class="btn btn-success">Đăng nhập</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- End login modal here -->
+  <!-- End login modal here -->
+
+
+
+
+  <!-- Begin register modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalLabel">Đăng ký</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" class="row justify-content-center">
+            <div class="form-group row">
+              <label class="col-md-4 px-auto" for="txtusername">Tên tài khoản: </label>
+              <input class="form-control col-md-7" type="text" name="txtusername" id="txtusername" placeholder="Tài khoản">
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 px-auto" for="txtFirstName">Họ và tên lót: </label>
+              <input class="form-control col-md-7" type="text" name="txtFirstName" id="txtFirstName" placeholder="Họ và tên lót">
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-md-4 px-auto" for="txtLastName">Tên: </label>
+              <input class="form-control col-md-7" type="text" name="txtusername" id="txtusername" placeholder="Tên">
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 px-auto" for="txtusername">Địa chỉ: </label>
+              <input class="form-control col-md-7" type="text" name="txtusername" id="txtusername" placeholder="Username">
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-md-4 px-auto" for="txtpwd">Mật khẩu:</label>
+              <input class="form-control col-md-7" type="password" name="txtpwd" id="txtpwd" placeholder="Mật khẩu">
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group text-center mx-auto">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
+            <button type="button" class="btn btn-success">Đăng nhập</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End register modal here -->
+
+  <!-- Begin footer -->
+
+  <footer class="">
+    <div>
+      <!-- <h1>test</h1> -->
+    </div>
+  </footer>
+
+  <!-- End footer here -->
 </body>
 
 <script src="../lib/bootstrap/js/jquery-3.4.1.min.js"></script>
