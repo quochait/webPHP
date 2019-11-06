@@ -1,3 +1,8 @@
+<?php
+  include "../source/mysource.php";
+  $p = new database();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +19,8 @@
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
+  <link href="../vendor/fontawesome/css/all.min.css">
   <link href="../css/business-frontpage.css" rel="stylesheet">
-  <link href="../vendor/fontawesome/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -327,7 +332,7 @@
 
                 <!--Grid column-->
                 <div class="text-center mb-3 col-md-12">
-                  <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1">Đăng nhập</button>
+                  <button type="submit" name="login" class="btn btn-success btn-block btn-rounded z-depth-1">Đăng nhập</button>
                 </div>
                 <!--Grid column-->
 
@@ -355,6 +360,21 @@
     </div>
   </div>
   <!-- End login modal here -->
+
+  <?php
+    switch($_POST['login']){
+      case "Đăng nhập":{
+        $username = $_POST['inputUsername'];
+        $password = $_POST['inputPwd'];
+        $p->messageBox($username);
+        $p->messageBox($password);
+
+        $p->login($username, $password);
+        break;
+      }
+    }
+  ?>
+
 
   <!-- Bootstrap core JavaScript -->
   <script src="https://use.fontawesome.com/75139a0ae0.js"></script>
