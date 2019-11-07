@@ -43,6 +43,7 @@
         $_SESSION['email'] = $email;
         $_SESSION['role'] = $role;
         $_SESSION['isLogin'] = TRUE;
+        
         if($role === "admin"){
           $this->navigationTo("admin.php");
         }
@@ -52,7 +53,7 @@
       }
     }
 
-    function changesProduct($sql){
+    function executeSql($sql){
       $link = $this->connect();
       if(mysqli_query($link, $sql)){
         return 1;
@@ -84,5 +85,76 @@
       session_unset();
       session_destroy();
     }
+
+    function isExistsUser($email)
+    {
+      $sql = "SELECT role FROM users WHERE email='$email' LIMIT 1";
+      if($this->executeSql($sql) == 1){
+        return TRUE;
+      }
+      else{
+        return FALSE;
+      }
+    }
+
+    function addUser($password, $ho, $ten, $email, $role, $diachi)
+    {
+      $link = $this->connect();
+      if(isExistsUser($email) == FALSE){
+        $sql = "INSERT INTO users(ho, ten, email, diachi, password, role) VALUES('$ho', '$ten', '$email', '$diachi', '$password', '$role')";
+        if($this->executeSql($sql) == 1){
+          $this->messageBox("Thêm thành viên thành công.");
+        }
+        else{
+          $this->messageBox("Hmmm. Có gì đó sai sai.");
+        }
+      }
+      else{
+        $this->messageBox("Tài khoản đã tồn tại.");
+      }
+    }
+
+    function loadProduct($filter){
+
+    }
+
+    function loadUser()
+    {
+      $link = $this->connect();
+      $sql = "SELECT * FROM users";
+      $result = mysqli_query($link, $sql);
+      $i = mysqli_num_rows($result);
+      $output = '';
+
+      if($i > 0){
+        while ($row = mysqli_fetch_array($result)) {
+          $output .= "
+            <div >
+              ".$row['ho']. " " . $row['email'] ."
+            </div>
+          ";
+        }
+        echo $output;
+      }
+
+    }
+
+    function checkAdmin()
+    {
+      $ho = $_SESSION['ho'];
+      $ten = $_SESSION['ten'];
+      $role = $_SESSION['role'];
+      $email = $_SESSION['email'];
+
+      if(isset($ho) && isset($ten) && isset($email) && isset($role)){
+        if($role==="admin"){
+          $this->confirmUser($ho, $ten, $email, $role);
+        }
+      }
+      else{
+        $this->navigationTo("index.php");
+      }
+    }
+
   }
 ?>
