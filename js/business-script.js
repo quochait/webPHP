@@ -4,3 +4,8 @@ function showLogin(){
    // alert("test");
   $("#loginForm").modal("toggle");
 }
+
+
+function test() {
+  alert("test");
+} 

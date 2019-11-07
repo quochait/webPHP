@@ -29,7 +29,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index.php">Rose <i class="far fa-user"></i></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#darkModalForm"
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -49,17 +49,30 @@
           
         </ul>
         <div class="ml-auto">
+        
+          <?php            
+            session_start();
+            $isLogin = $_SESSION['isLogin'];
+            if(isset($isLogin) !== TRUE){
+              echo '<button class="btn btn-secondary mr-1" data-toggle="modal" data-target="#darkModalForm">Đăng ký</button>';
+              echo '<button class="btn btn-success ml-auto" data-toggle="modal" data-target="#loginForm">Đăng nhập</button>';
+            }
+            else{
+              $role = $_SESSION['role'];
+              if($role === "admin"){
+                echo '<a href="admin.php" class="btn btn-outline-secondary text-white mr-1">Quản lý</a>';
+              }
+              echo '<a href="logout.php" class="btn btn-outline-secondary text-white">Đăng xuất</a>';
+            }
           
-              <button class="btn btn-secondary mr-1" data-toggle="modal" data-target="#darkModalForm">Đăng ký</button>
-           
-          
-              <button class="btn btn-success ml-auto" data-toggle="modal" data-target="#loginForm">Đăng nhập</button>
-           
+          ?>
           </div>
-        <form method="get" class="form-inline ml-auto">
-          <label for="inputSearch"></label>
-          <input class="form-control" type="text" name="inputSearch" id="inputSearch" placeholder="Nhập sản phẩm...">
-          <button class="btn text-white"><i class="fa fa-search"></i></button>
+        <form method="get" class="form-inline ml-auto my-1">
+          <div class="d-inline-flex">
+            <input class="form-control" type="text" name="inputSearch" id="inputSearch" placeholder="Nhập sản phẩm...">
+            <button class="btn text-white"><i class="fa fa-search"></i></button>
+          
+          </div>
         </form>
       </div>
     </div>
@@ -92,7 +105,7 @@
               neque sequi doloribus.</p>
           </div>
           <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary">Xem thêm</a>
+            <a href="#" class="btn btn-primary mb-1">Xem thêm</a>
             <a href="#" class="btn btn-outline-danger ml-auto"><i class="fa fa-plus"></i> Thêm vào giỏ</a>
 
           </div>
@@ -108,7 +121,7 @@
               neque sequi doloribus.</p>
           </div>
           <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary">Xem thêm</a>
+            <a href="#" class="btn btn-primary mb-1">Xem thêm</a>
             <a href="#" class="btn btn-outline-danger ml-auto"><i class="fa fa-plus"></i> Thêm vào giỏ</a>
 
           </div>
@@ -124,7 +137,7 @@
               neque sequi doloribus.</p>
           </div>
           <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary">Xem thêm</a>
+            <a href="#" class="btn btn-primary mb-1">Xem thêm</a>
             <a href="#" class="btn btn-outline-danger ml-auto"><i class="fa fa-plus"></i> Thêm vào giỏ</a>
 
           </div>
@@ -263,7 +276,7 @@
 
               <!--Grid column-->
               <div class="text-center mb-3 col-md-12">
-                <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1">Đăng ký</button>
+                <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1" name="button" id="button">Đăng ký</button>
               </div>
               <!--Grid column-->
 
@@ -311,18 +324,18 @@
           <!--Body-->
           <div class="modal-body">
             <!--Body-->
-            <form action="" method="post">
+            <form method="post">
 
               <div class="md-form mb-5 text-center">
                 <label data-error="wrong" data-success="right" for="Form-email5">Địa chỉ email</label>
-                <input type="email" id="inputEmail" class="form-control validate white-text">
+                <input type="email" id="inputEmail" name="inputEmail" class="form-control validate white-text">
               </div>
 
 
 
               <div class="md-form pb-3 text-center">
                 <label data-error="wrong" data-success="right" for="Form-pass5">Password</label>
-                <input type="password" id="inputPassword" class="form-control validate white-text">
+                <input type="password" id="inputPassword" name="inputPassword" class="form-control validate white-text">
               </div>
 
               <hr>
@@ -332,7 +345,7 @@
 
                 <!--Grid column-->
                 <div class="text-center mb-3 col-md-12">
-                  <button type="submit" name="login" class="btn btn-success btn-block btn-rounded z-depth-1">Đăng nhập</button>
+                  <button type="submit" name="button" id="button" value="Đăng nhập" class="btn btn-success btn-block btn-rounded z-depth-1">Đăng nhập</button>
                 </div>
                 <!--Grid column-->
 
@@ -362,17 +375,22 @@
   <!-- End login modal here -->
 
   <?php
-    switch($_POST['login']){
-      case "Đăng nhập":{
-        $username = $_POST['inputUsername'];
-        $password = $_POST['inputPwd'];
-        $p->messageBox($username);
-        $p->messageBox($password);
 
-        $p->login($username, $password);
-        break;
+    if(isset($_POST['button'])){
+      switch ($_POST['button']) {
+        case "Đăng nhập":{
+          $username = $_POST['inputEmail'];
+          $password = $_POST['inputPassword'];
+          $p->login($username, $password);
+          break;
+        }
+        case "Đăng xuất":{
+          $p->logout();
+          break;
+        }
       }
     }
+    
   ?>
 
 
@@ -381,8 +399,6 @@
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../js/business-script.js"></script>
-
-
   
 </body>
 

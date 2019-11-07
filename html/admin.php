@@ -1,5 +1,21 @@
 <?php
-  
+  include '../source/mysource.php';
+  $p = new database();
+
+  session_start();
+  $ho = $_SESSION['ho'];
+  $ten = $_SESSION['ten'];
+  $role = $_SESSION['role'];
+  $email = $_SESSION['email'];
+
+  if(isset($ho) && isset($ten) && isset($email) && isset($role)){
+    if($role==="admin"){
+      $p->confirmUser($ho, $ten, $email, $role);
+    }
+  }
+  else{
+    $p->navigationTo("index.php");
+  }
 ?>
 
 <!DOCTYPE html>
