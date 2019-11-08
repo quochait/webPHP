@@ -15,11 +15,10 @@
       }
       else{
         mysqli_select_db($conn, "csdlbanhang");
-        mysqli_query($conn, "SET NAME UTF-8");
+        mysqli_set_charset($conn,"utf8");
         return $conn;
       }
     }
-
 
     function login($username, $password){
       $link = $this->connect();
@@ -88,29 +87,24 @@
 
     function isExistsUser($email)
     {
-      $sql = "SELECT role FROM users WHERE email='$email' LIMIT 1";
-      if($this->executeSql($sql) == 1){
-        return TRUE;
-      }
-      else{
-        return FALSE;
-      }
+      $link = $this->connect();
+      $sql = "SELECT role FROM users WHERE email='$email'";
+      $result = mysqli_query($link, $sql);
+      $i = mysqli_num_rows($result);
+
+      return $i;
     }
 
-    function addUser($password, $ho, $ten, $email, $role, $diachi)
+    function addUser($ho, $ten, $email, $password, $diachi, $role)
     {
       $link = $this->connect();
-      if(isExistsUser($email) == FALSE){
+      if($this->isExistsUser($email) == 0){
         $sql = "INSERT INTO users(ho, ten, email, diachi, password, role) VALUES('$ho', '$ten', '$email', '$diachi', '$password', '$role')";
-        if($this->executeSql($sql) == 1){
-          $this->messageBox("Thêm thành viên thành công.");
-        }
-        else{
-          $this->messageBox("Hmmm. Có gì đó sai sai.");
-        }
+        $result = $this->executeSql($sql);
+        return $result;
       }
       else{
-        $this->messageBox("Tài khoản đã tồn tại.");
+        return 0;
       }
     }
 
@@ -125,14 +119,27 @@
       $result = mysqli_query($link, $sql);
       $i = mysqli_num_rows($result);
       $output = '';
+      $index = 0;
 
       if($i > 0){
         while ($row = mysqli_fetch_array($result)) {
-          $output .= "
-            <div >
-              ".$row['ho']. " " . $row['email'] ."
-            </div>
-          ";
+          $email = "'" . $row['email'] . "'";
+          $output .= '
+            <tr id="user'.$index.'">
+              <td>'.$row['ho'].'</td>
+              <td>'.$row['ten'].'</td>
+              <td>'.$row['email'].'</td>
+              <td>'.$row['diachi'].'</td>
+              <td>'.$row['role'].'</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-primary" onclick="editUser('. $email .');" ><i class="fas fa-pen"></i></button>
+                  <button class="btn btn-danger" onclick="deleteUser('.$email.', '. $index .');"><i class="fas fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          ';
+          $index += 1;
         }
         echo $output;
       }
@@ -156,5 +163,11 @@
       }
     }
 
+    function deleteUser($email)
+    {
+      $sql = "DELETE FROM users WHERE email='$email' LIMIT 1";
+      $result = $this->executeSql($sql);
+      return $result;
+    }
   }
 ?>

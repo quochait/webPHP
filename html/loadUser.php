@@ -6,4 +6,3 @@
   $sql = "SELECT * FROM users";
   $p->loadUser();
 ?>
-
