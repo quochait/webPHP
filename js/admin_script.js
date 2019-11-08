@@ -30,11 +30,68 @@ function loadUser() {
   });
 }
 
-function editUser(email) {
-  $.ajax({
-    method: 'POST',
-    url: "editUser.php"
-  })
+function updateUser(index) {
+  let parentEditForm = $("#editUserForm");
+  let inputHo = parentEditForm.find("#inputHo").val();
+  let inputTen = parentEditForm.find("#inputTen").val();
+  let inputRole = parentEditForm.find("#inputRole").val();
+  let inputEmail = parentEditForm.find("#inputEmail").val();
+  let inputDiachi = parentEditForm.find("#inputDiachi").val();
+  let inputPassword = parentEditForm.find("#inputPassword").val();
+
+  if ((inputPassword.length > 4 || !inputPassword) && inputEmail.length > 0){
+    $.ajax({
+      method: 'POST',
+      url: 'updateUser.php',
+      data: {ho: inputHo, ten: inputTen, role: inputRole, password: inputPassword, diachi: inputDiachi, email: inputEmail},
+      success: function(data){
+        alert(data);
+        if(data){
+          alert("Chỉnh sửa thành công.");
+
+          let parent = $("#user" + index);
+
+          parent.find("td:nth-child(1)").html(inputHo);
+          parent.find("td:nth-child(2)").html(inputTen);
+          parent.find("td:nth-child(5)").html(inputRole);
+          parent.find("td:nth-child(3)").html(inputEmail);
+          parent.find("td:nth-child(4)").html(inputDiachi);
+        }
+        else{
+          alert("Chỉnh sửa không thành công.");
+        }
+      }
+    })
+  }
+  else{
+    alert("Nhập password từ 5 tới 12 ký tự hoặc để trống để giữ nguyên.");
+  }
+}
+
+
+function showFormEditUser(index) {
+  $("#editUserForm").modal("toggle");
+  let parent = $("#user" + index);
+
+  let ho = parent.find("td:nth-child(1)").html();
+  let ten = parent.find("td:nth-child(2)").html();
+  let role = parent.find("td:nth-child(5)").html();
+  let email = parent.find("td:nth-child(3)").html();
+  let diachi = parent.find("td:nth-child(4)").html();
+
+  let parentEditForm = $("#editUserForm");
+  parentEditForm.find("#inputHo").val(ho);
+  parentEditForm.find("#inputTen").val(ten);
+  parentEditForm.find("#inputEmail").val(email);
+  parentEditForm.find("#inputDiachi").val(diachi);
+  parentEditForm.find("#inputRole").val(role);
+
+}
+
+
+function editUser(email, index) {
+  showFormEditUser(index);
+  $("#editUserForm").find("#buttonSave").attr("onclick", "updateUser(" + index + ");");
 }
 
 function deleteUser(email, index) {

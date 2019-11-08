@@ -127,17 +127,6 @@
       </div>
       <!-- End of Main Content -->
 
-      <!-- Footer -->
-      <!-- <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
-          </div>
-        </div>
-      </footer> -->
-      <!-- End of Footer -->
-
-       
     </div>
     <!-- End of Content Wrapper -->
 
@@ -167,6 +156,69 @@
       </div>
     </div>
   </div>
+
+  <!-- Begin modal edit user -->
+  <div class="modal" id="editUserForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title text-black">Chỉnh sửa thông tin</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputHo">Họ và tên lót:</label>
+            <input class="form-control col-md-8" type="text" name="inputHo" id="inputHo" placeholder="Họ và tên lót"> 
+            <span class="text-danger font-italic ml-4" id="noficationInputHo"></span>
+          </div>
+          
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputTen">Tên:</label>
+            <input class="form-control col-md-8" type="text" name="inputTen" id="inputTen"  placeholder="Tên">
+            <span class="text-danger font-italic ml-4" id="noficationInputTen"></span>
+          </div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputEmail">Email:</label>
+            <input class="form-control col-md-8" type="email" name="inputEmail" id="inputEmail"  placeholder="Email">
+            <span class="text-danger font-italic ml-4" id="noficationInputEmail"></span>
+          </div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputPassword">Password:</label>
+            <input class="form-control col-md-8" type="password" name="inputPassword" id="inputPassword"  placeholder="Password">
+            <span class="text-danger font-italic ml-4" id="noficationInputPassword"></span>
+          </div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputDiachi">Địa chỉ:</label>
+            <input class="form-control col-md-8" type="text" name="inputDiachi" id="inputDiachi"  placeholder="Địa chỉ">
+            <span class="text-danger font-italic ml-4" id="noficationInputDiaChi"></span>
+          </div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputRole">Phân quyền:</label> 
+            <select class="form-control col-md-5 text-center" name="inputRole" id="inputRole">
+            <span class="text-danger font-italic ml-4" id="noficationInputHo"></span>
+              <option value="user">Thành viên</option>
+              <option value="admin">Quản trị viên</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer mx-auto">
+          <button class="btn btn-success mr-2" id="buttonSave">Lưu</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- End modal edit user here -->
 
   <!-- Bootstrap core JavaScript-->
   <!-- <script src="../js/admin_script.js"></script> -->

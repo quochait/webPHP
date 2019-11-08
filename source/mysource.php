@@ -133,7 +133,7 @@
               <td>'.$row['role'].'</td>
               <td>
                 <div class="btn-group">
-                  <button class="btn btn-primary" onclick="editUser('. $email .');" ><i class="fas fa-pen"></i></button>
+                  <button class="btn btn-primary" onclick="editUser('. $email .', '. $index .');" ><i class="fas fa-pen"></i></button>
                   <button class="btn btn-danger" onclick="deleteUser('.$email.', '. $index .');"><i class="fas fa-trash"></i></button>
                 </div>
               </td>
@@ -166,6 +166,21 @@
     function deleteUser($email)
     {
       $sql = "DELETE FROM users WHERE email='$email' LIMIT 1";
+      $result = $this->executeSql($sql);
+      return $result;
+    }
+
+    function updateUser($ho, $ten, $role, $password, $diachi, $email)
+    {
+      $sql = '';
+      $hashed = md5($password);
+      
+      if(strlen($password) > 0){
+       $sql = "UPDATE users SET ho='$ho', ten='$ten', role='$role', password='" . $hashed . "', diachi='$diachi', email='$email' WHERE email='$email'"; 
+      }
+      else{
+        $sql = "UPDATE users SET ho='$ho', ten='$ten', role='$role', diachi='$diachi', email='$email' WHERE email='$email'";
+      }
       $result = $this->executeSql($sql);
       return $result;
     }
