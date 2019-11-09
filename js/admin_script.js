@@ -1,6 +1,7 @@
 // debugger
 function loadUser() {
   $("#tagTable>h6").text("Danh sách thành viên");
+  $("#showImages").html("");
   $.ajax({
     method: 'GET',
     url: 'loadUser.php',
@@ -184,8 +185,10 @@ function addUser() {
   }
 }
 
+// show from để thêm user vào database 
 function showFormAddUser(){
   $("#tagTable>h6").text("Thêm thành viên");
+  $("#showImages").html("");
   $("#mainTable").html("");
   let form = `
     <div class="row mb-2">
@@ -257,9 +260,21 @@ function checkEmpty(target, targetNofication) {
   });
 }
 
-function loadProduct() {
+
+//lấy sử liệu từ database và hiển thị 
+function loadProducts() {
   $("#tagTable>h6").text("Danh sách sản phẩm.");
+  $("#showImages").html();
   $("#showData>.card>.card-body").html("");
+
+  $.ajax({
+    method: "POST",
+    url: "getProducts.php",
+    success: function (data) {
+      console.log(data);
+    }
+  })
+
   let form = `
     
   `;
@@ -269,6 +284,7 @@ function loadProduct() {
 
 function showFormAddProduct() {
   $("#tagTable>h6").text("Thêm sản phẩm");
+  $("#showImages").html("");
   $.ajax({
     method: "POST",
     url: "getProductType.php",
@@ -350,13 +366,6 @@ function showFormAddProduct() {
 }
 
 
-
-//lấy loại sản phẩm trong database
-function getProductType() {
-  
-}
-
-
 // Show hình ảnh được thêm vào trong thêm sản phẩm
 function addBlockImage(input) {
   if(input && input){
@@ -386,32 +395,31 @@ function saveProduct() {
   let inputTensp = $("#inputTensp").val();
   let inputSoluong = $("#inputSoluong").val();
   
-  $.ajax({
-    method: "POST",
-    url: "addProduct.php",
-    data: { tensp: inputTensp, loaisp: inputLoai, mota: inputMota, gia: inputGia, soluong: inputSoluong},
-    success: function (data) {
-      if(data == 1){
-        alert("Thêm sản phẩm thành công.");
+  if (checkNotEmpty(inputGia) && checkNotEmpty(inputMota) && checkNotEmpty(inputLoai) && checkNotEmpty(inputTensp) && checkNotEmpty(inputSoluong)){
+    $.ajax({
+      method: "POST",
+      url: "addProduct.php",
+      data: { tensp: inputTensp, loaisp: inputLoai, mota: inputMota, gia: inputGia, soluong: inputSoluong},
+      success: function (data) {
+        if(data == 1){
+          alert("Thêm sản phẩm thành công.");
+          addImagesToDatabase();
+          showFormAddProduct();
+        }
+        else{
+          alert("Thêm sản phẩm không thành công.");
+        }
       }
-      else{
-        alert("Thêm sản phẩm không thành công.");
-      }
-    }
-  });
-  
-  addImagesToDatabase();
- 
+    });
+  }
+  else{
+    alert("Nhập đầy đủ và chính xác thông tin.");
+  }
 }
 
 // Thêm ảnh sản phẩm vào database
 function addImagesToDatabase() {
-  // let a = $("#showImages").find("img").map(function(){
-  //   return $(this);
-  // }).get();
-  // console.log(a);
-  // console.log(typeof(a[0]));
-  // console.log($("#inputImages").files);
+ 
   let images = document.getElementById("inputImages");
   var form_data = new FormData();
 
@@ -421,7 +429,7 @@ function addImagesToDatabase() {
 
   $.ajax({
     method: "POST",
-    url: "updateImage.php",
+    url: "addImages.php",
     data: form_data,
     contentType: false,
     processData: false,
@@ -429,10 +437,22 @@ function addImagesToDatabase() {
       console.log(data);
     }
   })
-  // console.log($("#inputImages").files[0]);
+
+  $("#showImages").html("");
+}
+
+// function check string truyền vào có rỗng hay không
+// trả về true nếu hàm không rỗng
+function checkNotEmpty(input) {
+  if(input.trim().length > 0){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 
 $(document).ready(function(){
-  showFormAddProduct();
+  loadProducts();
 });
 

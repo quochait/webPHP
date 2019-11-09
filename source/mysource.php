@@ -109,6 +109,20 @@
     }
 
     function loadProduct($filter){
+      $sql = "";
+      if(isset($filter)){
+        $sql = "SELECT * FROM sanpham WHERE ...";
+      }
+      $sql = "SELECT * FROM sanpham";
+      $link = $this->connect();
+      $result = mysqli_query($link, $sql);
+      $i = mysqli_num_rows($result);
+      $output = '';
+
+      if($i > 0){
+
+      }
+
 
     }
 
@@ -212,14 +226,36 @@
       return $result;
     }
 
+    // Thêm ảnh vào folder images/[idsanpham] và database
     function addImage($name, $size, $type, $tmpPath)
     {
       $sql = "SELECT Id FROM sanpham ORDER BY Id DESC LIMIT 1";
       $link = $this->connect();
       $result = mysqli_query($link, $sql);
-      $row = mysqli_fetch_arrary($result);
-      $Id = $row['Id'];
-      echo $Id;
+      $i = mysqli_num_rows($result);
+      $Id = 0;
+
+      if($i == 1){
+        while ($row = mysqli_fetch_array($result)) {
+          $Id = $row['Id'];  
+        }
+      }
+
+      $des = "../images/sanpham/" . $Id;
+     
+      if(!is_dir($des)){
+       mkdir($des); 
+      }
+
+      $des = $des .'/'. md5(time()) . "_" . $name;
+
+      if(!move_uploaded_file($tmpPath, $des)){
+        return "Khong upload file duoc\n";
+      }
+
+      $sql = "INSERT INTO hinhanh(Idsanpham, path) VALUES('$Id', '$des')";
+      $result = $this->executeSql($sql);
+      return $result;
     }
   }
 ?>

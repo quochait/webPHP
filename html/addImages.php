@@ -12,6 +12,11 @@
     $type = $_FILES['files']['type'][$index];
     $tmpPath = $_FILES['files']['tmp_name'][$index];
 
-    echo $p->addImage($name, $size, $type, $tmpPath);
-  }
+    if($size > 1024*1024*5){
+      echo 'Ảnh phải có dung lượng dưới 5MB.';
+    }
+    else{
+      echo $p->addImage($name, $size, $type, $tmpPath);
+    }
+ }
 ?>

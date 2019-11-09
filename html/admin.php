@@ -1,7 +1,6 @@
 <?php
   include '../source/mysource.php';
   $p = new database();
-
   session_start();
   $p->checkAdmin();
 ?>
@@ -27,10 +26,10 @@
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
   <style>
-  .same-height {
-    height: 300px;
-    object-fit: cover;
-  }
+    .same-height {
+      height: 300px;
+      object-fit: cover;
+    }
   </style>
 </head>
 
@@ -109,7 +108,7 @@
         </a>
         <div id="collapseProduct" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded text-center">
-            <a class="collapse-item font-weight-bold" onclick="loadProduct();">Danh sách</a>
+            <a class="collapse-item font-weight-bold" onclick="loadProducts();">Danh sách</a>
             <a class="collapse-item font-weight-bold" onclick="showFormAddProduct();">Thêm sản phẩm</a>
           </div>
         </div>
