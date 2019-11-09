@@ -22,10 +22,16 @@
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="../vendor/fontawesome/css/fontawesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="../css/font.css">
 
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  <style>
+  .same-height {
+    height: 300px;
+    object-fit: cover;
+  }
+  </style>
 </head>
 
 <body id="page-top">
@@ -94,6 +100,23 @@
       
       <!-- Divider -->
       <hr class="sidebar-divider">
+      
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true" aria-controls="collapseProduct">
+          <i class="fab fa-product-hunt"></i>
+          <span>Sản phẩm</span>
+        </a>
+        <div id="collapseProduct" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded text-center">
+            <a class="collapse-item font-weight-bold" onclick="loadProduct();">Danh sách</a>
+            <a class="collapse-item font-weight-bold" onclick="showFormAddProduct();">Thêm sản phẩm</a>
+          </div>
+        </div>
+      </li>
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider">
     </ul>
     <!-- End of Sidebar -->
 
@@ -116,13 +139,74 @@
             <div class="card-header py-3" id="tagTable">
               <h6 class="m-0 font-weight-bold text-primary">Danh sách thành viên</h6>
             </div>
+            <!-- begin card body  -->
             <div class="card-body">
-             
+              <div>
+                <div class="row mb-2">
+                  <label class="col-md-3" for="inputTensp">Tên sản phẩm:</label>
+                  <input class="form-control col-md-6" type="text" name="inputTensp" id="inputTensp" placeholder="Tên sản phẩm">
+                </div>
+              </div>
+
+              <div>
+                <div class="row mb-2">
+                  <label class="col-md-3" for="inputTensp">Giá:</label>
+                  <input class="form-control col-md-6" type="text" name="inputTensp" id="inputTensp" placeholder="Giá sản phẩm">
+                </div>
+              </div>
+
+              <div>
+                <div class="row mb-2">
+                  <label class="col-md-3" for="inputTensp">Mô tả:</label>
+                  <textarea class="form-control col-md-6" name="inputMota" id="inputMota" cols="30" rows="8" placeholder="Mô tả sản phẩm"></textarea>
+                </div>
+              </div>
+
+              <div>
+                <div class="row mb-2">
+                  <label class="col-md-3" for="inputTensp">Loại sản phẩm:</label>
+                  <select class="form-control col-md-6" name="inputProductsType" id="inputProductsType">
+                    <option value="aaa">111</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div>
+                <div class="row mb-2">
+                  <label class="col-md-3" for="inputNcc">Nhà cung cấp:</label>
+                  <select class="form-control col-md-6" name="inputNcc" id="inputNcc">
+                    <option value="aaa">111</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <div class="row mb-2">
+                  <label class="col-md-3" for="inputTensp">Số lượng:</label>
+                  <input class="form-control col-md-6" type="text" name="inputTensp" id="inputTensp" placeholder="Số lượng">
+                </div>
+              </div>
+
+              <div>
+                <div class="row mb-2">
+                  <p class="col-md-3">Hình ảnh: </p>
+                  <div class="custom-file col-md-6">
+                    <input type="file" class="custom-file-input" id="inputImages">
+                    <label class="custom-file-label" for="inputImages">Chọn hình ảnh</label>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
         </div>
         <!-- /.container-fluid -->
+
+        <div id="showImages" class="row ml-3 mb-3">
+        
+        </div>
+
 
       </div>
       <!-- End of Main Content -->
@@ -216,12 +300,11 @@
     </div>
   </div>
 
-
-
   <!-- End modal edit user here -->
 
+ 
+
   <!-- Bootstrap core JavaScript-->
-  <!-- <script src="../js/admin_script.js"></script> -->
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -234,15 +317,6 @@
   <!-- Page level plugins -->
   <script src="../vendor/chart.js/Chart.min.js"></script>
   
-  <!-- Page level custom scripts -->
-  <!-- <script src="../js/demo/chart-area-demo.js"></script>
-  <script src="../js/demo/chart-pie-demo.js"></script> -->
-  <!-- <script>
-    $(document).ready(function(){
-      alert("test");
-    })
-  </script> -->
-  <!-- <script type="text/javascript" src="../js/admin_script.js"></script> -->
   <script src="../js/admin_script.js"></script>
   
 </body>

@@ -184,5 +184,42 @@
       $result = $this->executeSql($sql);
       return $result;
     }
+
+    function getProductType()
+    {
+      $link = $this->connect();
+      $sql = "SELECT Id, tenloai FROM loaisp";
+      $result = mysqli_query($link, $sql);
+      $i = mysqli_num_rows($result);
+      $output = '';
+
+      if($i > 0){
+        while ($row = mysqli_fetch_array($result)) {
+          $id = $row['Id'];
+          $tenloai = $row['tenloai'];
+          $output .= '<option value="'.$id.'">'.$tenloai.'</option>';
+        }  
+      }
+
+      return $output;
+    }
+
+    // thêm sản phẩm vào database từ lấy data từ addProduct.php
+    function addProduct($tensp, $mota, $loaisp, $gia, $soluong){
+      $sql = "INSERT INTO sanpham(tensp, mota, loaisp, gia, soluong) VALUES('$tensp', '$mota', '$loaisp', '$gia', '$soluong')";
+      $result = $this->executeSql($sql);
+      
+      return $result;
+    }
+
+    function addImage($name, $size, $type, $tmpPath)
+    {
+      $sql = "SELECT Id FROM sanpham ORDER BY Id DESC LIMIT 1";
+      $link = $this->connect();
+      $result = mysqli_query($link, $sql);
+      $row = mysqli_fetch_arrary($result);
+      $Id = $row['Id'];
+      echo $Id;
+    }
   }
 ?>

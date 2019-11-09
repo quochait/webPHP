@@ -1,3 +1,4 @@
+// debugger
 function loadUser() {
   $("#tagTable>h6").text("Danh sách thành viên");
   $.ajax({
@@ -187,48 +188,47 @@ function showFormAddUser(){
   $("#tagTable>h6").text("Thêm thành viên");
   $("#mainTable").html("");
   let form = `
-      <div class="row mb-2">
-        <label class="col-md-3" for="inputHo">Họ và tên lót:</label>
-        <input class="form-control col-md-5" type="text" name="inputHo" id="inputHo" placeholder="Họ và tên lót"> 
-        <span class="text-danger font-italic ml-4" id="noficationInputHo"></span>
-      </div>
-      
-      <div class="row mb-2">
-        <label class="col-md-3" for="inputTen">Tên:</label>
-        <input class="form-control col-md-5" type="text" name="inputTen" id="inputTen"  placeholder="Tên">
-        <span class="text-danger font-italic ml-4" id="noficationInputTen"></span>
-      </div>
-      <div class="row mb-2">
-        <label class="col-md-3" for="inputEmail">Email:</label>
-        <input class="form-control col-md-5" type="email" name="inputEmail" id="inputEmail"  placeholder="Email">
-        <span class="text-danger font-italic ml-4" id="noficationInputEmail"></span>
-      </div>
-      <div class="row mb-2">
-        <label class="col-md-3" for="inputPassword">Password:</label>
-        <input class="form-control col-md-5" type="password" name="inputPassword" id="inputPassword"  placeholder="Password">
-        <span class="text-danger font-italic ml-4" id="noficationInputPassword"></span>
-      </div>
-      <div class="row mb-2">
-        <label class="col-md-3" for="inputDiachi">Địa chỉ:</label>
-        <input class="form-control col-md-5" type="text" name="inputDiachi" id="inputDiachi"  placeholder="Địa chỉ">
-        <span class="text-danger font-italic ml-4" id="noficationInputDiaChi"></span>
-      </div>
-      <div class="row mb-2">
-        <label class="col-md-3" for="inputRole">Phân quyển</label> 
-        <select class="form-control col-md-5 text-center" name="inputRole" id="inputRole">
-        <span class="text-danger font-italic ml-4" id="noficationInputHo"></span>
-          <option value="user">Thành viên</option>
-          <option value="admin">Quản trị viên</option>
-        </select>
-      </div>
+    <div class="row mb-2">
+      <label class="col-md-3" for="inputHo">Họ và tên lót:</label>
+      <input class="form-control col-md-5" type="text" name="inputHo" id="inputHo" placeholder="Họ và tên lót"> 
+      <span class="text-danger font-italic ml-4" id="noficationInputHo"></span>
+    </div>
+    
+    <div class="row mb-2">
+      <label class="col-md-3" for="inputTen">Tên:</label>
+      <input class="form-control col-md-5" type="text" name="inputTen" id="inputTen"  placeholder="Tên">
+      <span class="text-danger font-italic ml-4" id="noficationInputTen"></span>
+    </div>
+    <div class="row mb-2">
+      <label class="col-md-3" for="inputEmail">Email:</label>
+      <input class="form-control col-md-5" type="email" name="inputEmail" id="inputEmail"  placeholder="Email">
+      <span class="text-danger font-italic ml-4" id="noficationInputEmail"></span>
+    </div>
+    <div class="row mb-2">
+      <label class="col-md-3" for="inputPassword">Password:</label>
+      <input class="form-control col-md-5" type="password" name="inputPassword" id="inputPassword"  placeholder="Password">
+      <span class="text-danger font-italic ml-4" id="noficationInputPassword"></span>
+    </div>
+    <div class="row mb-2">
+      <label class="col-md-3" for="inputDiachi">Địa chỉ:</label>
+      <input class="form-control col-md-5" type="text" name="inputDiachi" id="inputDiachi"  placeholder="Địa chỉ">
+      <span class="text-danger font-italic ml-4" id="noficationInputDiaChi"></span>
+    </div>
+    <div class="row mb-2">
+      <label class="col-md-3" for="inputRole">Phân quyển</label> 
+      <select class="form-control col-md-5 text-center" name="inputRole" id="inputRole">
+      <span class="text-danger font-italic ml-4" id="noficationInputHo"></span>
+        <option value="user">Thành viên</option>
+        <option value="admin">Quản trị viên</option>
+      </select>
+    </div>
 
-      <div class="row mb-2 col-md-10">
-        <div class="mx-auto btn-group">
-          <button class="btn btn-success" onclick="addUser();">Thêm thành viên</button>
-          <button class="btn btn-warning" type="reset">Reset</button>
-        </div>
+    <div class="row mb-2 col-md-10">
+      <div class="mx-auto btn-group">
+        <button class="btn btn-success" onclick="addUser();">Thêm thành viên</button>
+        <button class="btn btn-warning" type="reset">Reset</button>
       </div>
-
+    </div>
   `;
   $("#showData>.card>.card-body").html(form);
 
@@ -256,3 +256,183 @@ function checkEmpty(target, targetNofication) {
     }
   });
 }
+
+function loadProduct() {
+  $("#tagTable>h6").text("Danh sách sản phẩm.");
+  $("#showData>.card>.card-body").html("");
+  let form = `
+    
+  `;
+  
+  $("#showData>.card>.card-body").html(form);
+}
+
+function showFormAddProduct() {
+  $("#tagTable>h6").text("Thêm sản phẩm");
+  $.ajax({
+    method: "POST",
+    url: "getProductType.php",
+    success: function (data) {
+      // alert(data);
+      let form = `
+        <div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputTensp">Tên sản phẩm:</label>
+            <input class="form-control col-md-6" type="text" name="inputTensp" id="inputTensp" placeholder="Tên sản phẩm">
+          </div>
+        </div>
+
+        <div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputGia">Giá:</label>
+            <input class="form-control col-md-6" type="text" name="inputGia" id="inputGia" placeholder="Giá sản phẩm">
+          </div>
+        </div>
+
+        <div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputMota">Mô tả:</label>
+            <textarea class="form-control col-md-6" name="inputMota" id="inputMota" cols="30" rows="8" placeholder="Mô tả sản phẩm"></textarea>
+          </div>
+        </div>
+
+        <div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputLoai">Loại sản phẩm:</label>
+            <select class="form-control col-md-6" name="inputLoai" id="inputLoai">
+              `+ data +`
+            </select>
+          </div>
+        </div>
+        
+        <!--
+        <div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputNcc">Nhà cung cấp:</label>
+            <select class="form-control col-md-6" name="inputNcc" id="inputNcc">
+              ` + data + `
+            </select>
+          </div>
+        </div>
+        -->
+
+        <div>
+          <div class="row mb-2">
+            <label class="col-md-3" for="inputSoluong">Số lượng:</label>
+            <input class="form-control col-md-6" type="text" name="inputSoluong" id="inputSoluong" placeholder="Số lượng">
+          </div>
+        </div>
+
+        <div>
+          <div class="row mb-2">
+            <p class="col-md-3">Hình ảnh: </p>
+            <div class="custom-file col-md-6">
+              <input type="file" class="custom-file-input" id="inputImages" accept="image/*" multiple>
+              <label class="custom-file-label" for="inputImages">Chọn hình ảnh</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <button class="btn btn-success" onclick="saveProduct()">Lưu</button>
+        </div>
+      `;
+      $("#showData>.card>.card-body").html(form);
+
+      $("#inputImages").change(function () {
+        $("#showImages").html("");
+        for (let index = 0; index < this.files.length; index++) {
+          addBlockImage(this.files[index]);
+        }
+      });
+    }
+  });
+}
+
+
+
+//lấy loại sản phẩm trong database
+function getProductType() {
+  
+}
+
+
+// Show hình ảnh được thêm vào trong thêm sản phẩm
+function addBlockImage(input) {
+  if(input && input){
+    let reader = new FileReader();
+    reader.onload = function (e){
+      let div = `
+        <div class="col-md-4 col-lg-3 mt-3 text-center">
+          <img id="blah" src="`+ e.target.result +`" class="img-fluid w-100 rounded same-height">
+          <button class="btn btn-danger mt-2" onclick="removeBlackImage(0)">
+            Xóa
+          </button>
+        </div>
+      `;
+      $("#showImages").append(div);
+      // $("#blah").attr("src", e.target.result);
+    }
+    reader.readAsDataURL(input);
+  }
+}
+
+
+// lưu sản phẩm vào database
+function saveProduct() {
+  let inputGia = $("#inputGia").val();
+  let inputMota = $("#inputMota").val();
+  let inputLoai = $("#inputLoai").val();
+  let inputTensp = $("#inputTensp").val();
+  let inputSoluong = $("#inputSoluong").val();
+  
+  $.ajax({
+    method: "POST",
+    url: "addProduct.php",
+    data: { tensp: inputTensp, loaisp: inputLoai, mota: inputMota, gia: inputGia, soluong: inputSoluong},
+    success: function (data) {
+      if(data == 1){
+        alert("Thêm sản phẩm thành công.");
+      }
+      else{
+        alert("Thêm sản phẩm không thành công.");
+      }
+    }
+  });
+  
+  addImagesToDatabase();
+ 
+}
+
+// Thêm ảnh sản phẩm vào database
+function addImagesToDatabase() {
+  // let a = $("#showImages").find("img").map(function(){
+  //   return $(this);
+  // }).get();
+  // console.log(a);
+  // console.log(typeof(a[0]));
+  // console.log($("#inputImages").files);
+  let images = document.getElementById("inputImages");
+  var form_data = new FormData();
+
+  for (let index = 0; index < images.files.length; index++) {
+    form_data.append("files["+index+"]", images.files[index]);
+  }
+
+  $.ajax({
+    method: "POST",
+    url: "updateImage.php",
+    data: form_data,
+    contentType: false,
+    processData: false,
+    success: function(data){
+      console.log(data);
+    }
+  })
+  // console.log($("#inputImages").files[0]);
+}
+
+$(document).ready(function(){
+  showFormAddProduct();
+});
+
