@@ -161,13 +161,13 @@
           <h6 class="text-uppercase font-weight-bold">Sản phẩm</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#!" class="font-weight-bold">Son</a>
+            <a href="?filter=Son" class="font-weight-bold">Son</a>
           </p>
           <p>
-            <a href="#!" class="font-weight-bold">Mặt nạ</a>
+            <a href="?filter=Mặt nạ" class="font-weight-bold">Mặt nạ</a>
           </p>
           <p>
-            <a href="#!" class="font-weight-bold">Nước tẩy trang</a>
+            <a href="?filter=Nước tẩy trang" class="font-weight-bold">Nước tẩy trang</a>
           </p>
 
         </div>
