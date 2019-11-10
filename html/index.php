@@ -19,8 +19,15 @@
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../vendor/fontawesome/css/all.min.css">
+  <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="../css/font.css">
   <link href="../css/business-frontpage.css" rel="stylesheet">
+  <style>
+    .same-height {
+      height: 300px;
+      object-fit: cover;
+    }
+  </style>
 </head>
 
 <body>
@@ -28,7 +35,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.php">Rose <i class="far fa-user"></i></a>
+      <a class="navbar-brand font-weight-bold" href="index.php">Rose</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,14 +44,14 @@
         <ul class="navbar-nav ml-auto mr-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link text-white font-weight-bold mr-2" href="#">Son</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link text-white font-weight-bold mr-2" href="#">Mặt nạ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link text-white font-weight-bold mr-2" href="#">Nước tẩy trang</a>
           </li>
           
         </ul>
@@ -96,72 +103,30 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus
-              neque sequi doloribus.</p>
+      <?php
+        $listProducts = json_decode($p->loadProduct(''), true);
+        // $p->messageBox(count($listProducts));
+        for ($index=0; $index < count($listProducts) ; $index++) { 
+          // $p->messageBox($listProducts[$index]['tensp']);
+          $element = $listProducts[$index];
+          echo '
+            <div class="col-md-4 mb-5" id="'. $element['tensp'] .'">
+            <div class="card h-100">
+              <img class="card-img-top same-height" src="'. $element['path'] .'" alt="'. $element['tensp'] .'">
+              <div class="card-body">
+                <h4 class="card-title text-primary">'. $element['tensp'] .'</h4>
+                <p class="card-text">'. $element['mota'] .'</p>
+                <h6 class="text-danger"><i class="fas fa-dollar-sign"></i>'. $element['gia'] .' VND</h6>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-primary" onclick="editProduct()"><i class="fas fa-pen"></i> Chỉnh sửa</button>
+                <button class="btn btn-danger" onclick="deleteProduct(`+ element.Id +`)"><i class="fas fa-trash"></i> Xóa</button>
+              </div>
+            </div>
           </div>
-          <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary mb-1">Xem thêm</a>
-            <a href="#" class="btn btn-outline-danger ml-auto"><i class="fa fa-plus"></i> Thêm vào giỏ</a>
-
-          </div>
-        </div>
-      </div>
-
-       <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus
-              neque sequi doloribus.</p>
-          </div>
-          <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary mb-1">Xem thêm</a>
-            <a href="#" class="btn btn-outline-danger ml-auto"><i class="fa fa-plus"></i> Thêm vào giỏ</a>
-
-          </div>
-        </div>
-      </div>
-
-       <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus
-              neque sequi doloribus.</p>
-          </div>
-          <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary mb-1">Xem thêm</a>
-            <a href="#" class="btn btn-outline-danger ml-auto"><i class="fa fa-plus"></i> Thêm vào giỏ</a>
-
-          </div>
-        </div>
-      </div>
-
-       <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus
-              neque sequi doloribus.</p>
-          </div>
-          <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary">Xem thêm</a>
-            <a href="#" class="btn btn-outline-danger ml-auto"><i class="fa fa-plus"></i> Thêm vào giỏ</a>
-
-          </div>
-        </div>
-      </div>
-
-      
-      
+          ';
+        }
+      ?>
     </div>
     <!-- /.row -->
 
@@ -208,7 +173,7 @@
 
 
         <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 text-center">
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
           <!-- Links -->
           <h6 class="text-uppercase font-weight-bold">Liên hệ</h6>

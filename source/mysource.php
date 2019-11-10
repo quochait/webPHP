@@ -108,22 +108,40 @@
       }
     }
 
+    // lấy sản phẩm trong database 
     function loadProduct($filter){
       $sql = "";
-      if(isset($filter)){
-        $sql = "SELECT * FROM sanpham WHERE ...";
-      }
       $sql = "SELECT * FROM sanpham";
       $link = $this->connect();
       $result = mysqli_query($link, $sql);
       $i = mysqli_num_rows($result);
-      $output = '';
+      $output = array();
 
       if($i > 0){
+        while ($row = mysqli_fetch_array($result)) {
+          $Id = $row['Id'];
+          $path = '';
+          
+          $sql = "SELECT path FROM hinhanh WHERE Idsanpham='$Id' LIMIT 1";
+          $result_image = mysqli_query($link, $sql);
 
+          while ($row_image = mysqli_fetch_array($result_image)) {
+            $path = $row_image['path'];
+          }
+          
+          $tmp['tensp'] = $row['tensp'];
+          $tmp['mota'] = $row['mota'];
+          $tmp['loaisp'] = $row['loaisp'];
+          $tmp['gia'] = $row['gia'];
+          $tmp['soluong'] = $row['soluong'];
+          $tmp['Id'] = $row['Id'];
+          $tmp['path'] = $path;
+
+          array_push($output, $tmp);
+        }
       }
 
-
+      return json_encode($output);
     }
 
     function loadUser()
@@ -256,6 +274,27 @@
       $sql = "INSERT INTO hinhanh(Idsanpham, path) VALUES('$Id', '$des')";
       $result = $this->executeSql($sql);
       return $result;
+    }
+
+    //xóa product và ảnh liên quan
+    function deleteProduct($Id){
+      $output = '';
+      $sql = "DELETE FROM hinhanh WHERE Idsanpham='$Id'";
+      $output .= $this->executeSql($sql);
+      $sql = "DELETE FROM sanpham WHERE Id='$Id'";
+      $des = "../images/sanpham/" . $Id;
+      $output .= $this->executeSql($sql);
+
+      //xóa ảnh và folder của ảnh
+      if(is_dir($des)){
+        $files = glob($des . '/*');
+        foreach ($files as $file) {
+          unlink($file);
+        }
+        rmdir($des);
+      }
+
+      return $output;
     }
   }
 ?>

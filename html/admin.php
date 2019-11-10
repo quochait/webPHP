@@ -20,7 +20,6 @@
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="../vendor/fontawesome/css/fontawesome.min.css">
   <link rel="stylesheet" href="../css/font.css">
 
   <!-- Custom styles for this template-->

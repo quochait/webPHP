@@ -4,5 +4,9 @@
   session_start();
   $p->checkAdmin();
 
-  echo $p->loadProduct('');
+  $Id = $_POST['Id'];
+
+  if(isset($Id)){
+    echo $p->deleteProduct($Id);
+  }
 ?>

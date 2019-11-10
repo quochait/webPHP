@@ -7,7 +7,7 @@ function loadUser() {
     url: 'loadUser.php',
     success: function(data){
       $("#showData>.card>.card-body").html(`
-         <div class="table-responsive">
+        <div class="table-responsive">
           <table class="table table-bordered" id="mainTable" width="100%" cellspacing="0">
             <thead class="text-center">
               <tr>
@@ -260,6 +260,20 @@ function checkEmpty(target, targetNofication) {
   });
 }
 
+//xóa sản phẩm trong database
+function deleteProduct(id){
+  $("#showImages").find("#product_" + id).remove();
+  // $("#product_" + id).remove();
+  // console.log("vao");
+  $.ajax({
+    method: "POST",
+    url: "deleteProduct.php",
+    data: {Id: id},
+    success: function(data){
+      console.log(data);
+    }
+  });
+}
 
 //lấy sử liệu từ database và hiển thị 
 function loadProducts() {
@@ -269,19 +283,52 @@ function loadProducts() {
 
   $.ajax({
     method: "POST",
+    url: "getProductType.php",
+    success: function (productsType) {
+      let selectTag = `
+        <select class="form-control col-md-3 mt-2" name="inputFilter" id="inputFilter">
+          <option value="0">None</option>
+          `+ productsType +`
+        </select>
+      `;
+      // console.log(productsType);
+      $("#tagTable>h6").append(selectTag);
+    }
+  });
+
+  $.ajax({
+    method: "POST",
     url: "getProducts.php",
     success: function (data) {
-      console.log(data);
-    }
-  })
+      let listProduct = JSON.parse(data);
 
-  let form = `
-    
-  `;
-  
-  $("#showData>.card>.card-body").html(form);
+      for (let index = 0; index < listProduct.length; index++) {
+        let element = listProduct[index];
+        let id = "product_" + element.Id;
+        let cardTag = `
+          <div class="col-md-4 mb-5" id="`+ id +`">
+            <div class="card h-100">
+              <img class="card-img-top same-height" src="`+ element.path +`" alt="`+ element.ten +`">
+              <div class="card-body">
+                <h4 class="card-title text-primary">`+ element.tensp +`</h4>
+                <p class="card-text">`+ element.mota.substring(0, 30) +`</p>
+                <h6 class="text-danger"><i class="fas fa-dollar-sign"></i> `+ element.gia +` VND</h6>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-primary" onclick="editProduct()"><i class="fas fa-pen"></i> Chỉnh sửa</button>
+                <button class="btn btn-danger" onclick="deleteProduct(`+ element.Id +`)"><i class="fas fa-trash"></i> Xóa</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        $("#showImages").append(cardTag);
+      }
+    }
+  });
 }
 
+//Show form tạo thêm sản phẩm
 function showFormAddProduct() {
   $("#tagTable>h6").text("Thêm sản phẩm");
   $("#showImages").html("");
@@ -358,23 +405,28 @@ function showFormAddProduct() {
       $("#inputImages").change(function () {
         $("#showImages").html("");
         for (let index = 0; index < this.files.length; index++) {
-          addBlockImage(this.files[index]);
+          addBlockImage(this.files[index], index);
         }
       });
     }
   });
 }
 
+//xóa ảnh
+function removeBlackImage(index){
+  $("#image_" + index).remove();
+}
+
 
 // Show hình ảnh được thêm vào trong thêm sản phẩm
-function addBlockImage(input) {
+function addBlockImage(input, index) {
   if(input && input){
     let reader = new FileReader();
     reader.onload = function (e){
       let div = `
-        <div class="col-md-4 col-lg-3 mt-3 text-center">
+        <div class="col-md-4 col-lg-3 mt-3 text-center" id="image_`+ index +`">
           <img id="blah" src="`+ e.target.result +`" class="img-fluid w-100 rounded same-height">
-          <button class="btn btn-danger mt-2" onclick="removeBlackImage(0)">
+          <button class="btn btn-danger mt-2" onclick="removeBlackImage(`+ index +`)">
             Xóa
           </button>
         </div>
@@ -455,4 +507,3 @@ function checkNotEmpty(input) {
 $(document).ready(function(){
   loadProducts();
 });
-
