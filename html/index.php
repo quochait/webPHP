@@ -44,14 +44,14 @@
         <ul class="navbar-nav ml-auto mr-auto">
 
           <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold mr-2" href="#">Son</a>
+            <a class="nav-link text-white font-weight-bold mr-2" href="?filter=Son">Son</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold mr-2" href="#">Mặt nạ</a>
+            <a class="nav-link text-white font-weight-bold mr-2" href="?filter=Mặt nạ">Mặt nạ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold mr-2" href="#">Nước tẩy trang</a>
+            <a class="nav-link text-white font-weight-bold mr-2" href="?filter=Nước tẩy trang">Nước tẩy trang</a>
           </li>
           
         </ul>
@@ -104,7 +104,9 @@
 
     <div class="row">
       <?php
-        $listProducts = json_decode($p->loadProduct(''), true);
+        $filter = $_GET['filter'];
+        
+        $listProducts = json_decode($p->loadProduct($filter), true);
         // $p->messageBox(count($listProducts));
         for ($index=0; $index < count($listProducts) ; $index++) { 
           // $p->messageBox($listProducts[$index]['tensp']);
@@ -119,8 +121,8 @@
                 <h6 class="text-danger"><i class="fas fa-dollar-sign"></i>'. $element['gia'] .' VND</h6>
               </div>
               <div class="card-footer text-center">
-                <button class="btn btn-primary" onclick="editProduct()"><i class="fas fa-pen"></i> Chỉnh sửa</button>
-                <button class="btn btn-danger" onclick="deleteProduct(`+ element.Id +`)"><i class="fas fa-trash"></i> Xóa</button>
+                <button class="btn btn-primary" onclick="editProduct()"><i class="fas fa-pen"></i> Xem thêm</button>
+                <button class="btn btn-danger" onclick="deleteProduct(`+ element.Id +`)"><i class="fa fa-plus"></i> Thêm vào giỏ</button>
               </div>
             </div>
           </div>

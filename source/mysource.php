@@ -111,7 +111,16 @@
     // lấy sản phẩm trong database 
     function loadProduct($filter){
       $sql = "";
-      $sql = "SELECT * FROM sanpham";
+      // $this->messageBox($filter);
+      
+      if(isset($filter) && $filter != ''){
+        $like = '%'. strtolower($filter) . '%';
+        $sql = "SELECT * FROM sanpham WHERE loaisp IN (SELECT Id FROM loaisp WHERE lower(tenloai) LIKE '$like')";
+      }
+      else{
+        $sql = "SELECT * FROM sanpham";
+      }
+
       $link = $this->connect();
       $result = mysqli_query($link, $sql);
       $i = mysqli_num_rows($result);
