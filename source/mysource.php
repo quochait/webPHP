@@ -115,6 +115,7 @@
     function loadProduct($filter){
       $sql = "";
       // $this->messageBox($filter);
+      // $productType = '';
       
       if(isset($filter) && $filter != ''){
         $like = '%'. strtolower($filter) . '%';
@@ -192,6 +193,7 @@
 
     function checkAdmin()
     {
+      
       $ho = $_SESSION['ho'];
       $ten = $_SESSION['ten'];
       $role = $_SESSION['role'];
@@ -200,6 +202,10 @@
       if(isset($ho) && isset($ten) && isset($email) && isset($role)){
         if($role==="admin"){
           $this->confirmUser($ho, $ten, $email, $role);
+          // $this->messageBox($role);
+        }
+        else{
+          $this->navigationTo("index.php");
         }
       }
       else{
@@ -307,6 +313,14 @@
       }
 
       return $output;
+    }
+
+    function registerUser($email, $diachi, $password, $ho, $ten)
+    {
+      $sql = "INSERT INTO users(ho, ten, email, diachi, password, role) VALUES( '$ho', '$ten', '$email', '$diachi', '".md5($password)."', 'user')";
+      // return $sql;
+      $result = $this->executeSql($sql);
+      return $result;
     }
   }
 ?>

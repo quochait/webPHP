@@ -293,6 +293,18 @@ function loadProducts() {
       `;
       // console.log(productsType);
       $("#tagTable>h6").append(selectTag);
+      $("#inputFilter").change(function(){
+        // alert($(this).val());
+        $("#showImages").not(".productType_" + $(this).val()).map(function(){
+          console.log($(this).attr("class"));
+        });
+        // $("#showImages").find(".productType_" + $(this).val()).map(function () {
+        //   // $(this).show();
+        //   console.log($(this));
+        // });
+
+
+      });
     }
   });
 
@@ -306,7 +318,7 @@ function loadProducts() {
         let element = listProduct[index];
         let id = "product_" + element.Id;
         let cardTag = `
-          <div class="col-md-4 mb-5" id="`+ id +`">
+          <div class="col-md-4 mb-5 productType_`+ element.loaisp +`" id="`+ id +`">
             <div class="card h-100">
               <img class="card-img-top same-height" src="`+ element.path +`" alt="`+ element.ten +`">
               <div class="card-body">

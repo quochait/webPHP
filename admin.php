@@ -2,6 +2,7 @@
   include 'source/mysource.php';
   $p = new database();
   session_start();
+  // $p->messageBox($_SESSION['role']);
   $p->checkAdmin();
 ?>
 

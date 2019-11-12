@@ -1,6 +1,19 @@
 <?php
   include "source/mysource.php";
   $p = new database();
+
+  if(isset($_POST["add_to_cart"])){
+    if(isset($_SESSION['shopping_cart'])){
+
+    }
+    else{
+      $item_array = array(
+        'item_id' => $_GET['id'],
+        'item_name' => $_POST['tensp'],
+        'item_price' => $_POST['gia']
+      );
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +66,21 @@
           <li class="nav-item">
             <a class="nav-link text-white font-weight-bold mr-2" href="?filter=Nước tẩy trang">Nước tẩy trang</a>
           </li>
-          
+          <li class="nav-item">
+            <a class="nav-link text-white font-weight-bold mr-2" href="#">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="text-danger" id="countShoppingCart">
+              <?php
+                $count = count($_SESSION['shopping-cart']);
+                if(isset($count)){
+                  echo $count;
+                }
+                else{
+                  echo '0';
+                }
+             ?></span>
+            </a>
+          </li>
         </ul>
         <div class="ml-auto">
         
@@ -71,7 +98,8 @@
               }
               echo '<a href="logout.php" class="btn btn-outline-secondary text-white">Đăng xuất</a>';
             }
-          
+            
+            
           ?>
           </div>
         <form method="get" class="form-inline ml-auto my-1">
@@ -105,25 +133,25 @@
         $filter = $_GET['filter'];
         
         $listProducts = json_decode($p->loadProduct($filter), true);
-        // $p->messageBox(count($listProducts));
+        
         for ($index=0; $index < count($listProducts) ; $index++) { 
-          // $p->messageBox($listProducts[$index]['tensp']);
+        
           $element = $listProducts[$index];
           echo '
             <div class="col-md-4 mb-5" id="'. $element['tensp'] .'">
-            <div class="card h-100">
-              <img class="card-img-top same-height" src="'. $element['path'] .'" alt="'. $element['tensp'] .'">
-              <div class="card-body">
-                <h4 class="card-title text-primary">'. $element['tensp'] .'</h4>
-                <p class="card-text">'. $element['mota'] .'</p>
-                <h6 class="text-danger"><i class="fas fa-dollar-sign"></i>'. $element['gia'] .' VND</h6>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-primary" onclick="editProduct()"><i class="fas fa-pen"></i> Xem thêm</button>
-                <button class="btn btn-danger" onclick="deleteProduct(`+ element.Id +`)"><i class="fa fa-plus"></i> Thêm vào giỏ</button>
+              <div class="card h-100">
+                <img class="card-img-top same-height" src="'. $element['path'] .'" alt="'. $element['tensp'] .'">
+                <div class="card-body">
+                  <h4 class="card-title text-primary" name="tensp">'. $element['tensp'] .'</h4>
+                  <p class="card-text">'. $element['mota'] .'</p>
+                  <h6 class="text-danger"><i class="fas fa-dollar-sign"></i>'. $element['gia'] .' VND</h6>
+                </div>
+                <div class="card-footer text-center">
+                  <button class="btn btn-primary"><i class="fas fa-pen"></i> Xem thêm</button>
+                  <button class="btn btn-danger" onclick="add_to_cart('.$element['tensp'].')"><i class="fa fa-plus"></i> Thêm vào giỏ</button>
+                </div>
               </div>
             </div>
-          </div>
           ';
         }
       ?>
@@ -210,35 +238,45 @@
           <!--Body-->
           <div class="modal-body">
             <!--Body-->
-            <div class="md-form mb-5 text-center">
+            <div class="md-form mb-3 text-center">
               <label data-error="wrong" data-success="right" for="Form-email5">Địa chỉ email</label>
-              <input type="email" id="inputEmail" class="form-control validate white-text">
+              <input type="email" id="inputEmail" class="form-control validate white-text" placeholder="Nhập email">
             </div>
 
-            <div class="md-form mb-5 text-center">
+            <div class="md-form mb-3 text-center">
+              <label data-error="wrong" data-success="right" for="Form-email5">Họ</label>
+              <input type="email" id="inputHo" class="form-control validate white-text" placeholder="Nhập họ">
+            </div>
+
+            <div class="md-form mb-3 text-center">
+              <label data-error="wrong" data-success="right" for="Form-email5">Tên</label>
+              <input type="email" id="inputTen" class="form-control validate white-text" placeholder="Nhập tên">
+            </div>
+
+            <div class="md-form mb-3 text-center">
               <label data-error="wrong" data-success="right" for="Form-email5">Địa chỉ</label>
-              <input type="text" id="inputAddress" class="form-control validate white-text">
+              <input type="text" id="inputAddress" class="form-control validate white-text" placeholder="Nhập địa chỉ">
             </div>
 
 
             <div class="md-form pb-3 text-center">
               <label data-error="wrong" data-success="right" for="Form-pass5">Password</label>
-              <input type="password" id="inputPassword" class="form-control validate white-text">
-              <div class="form-group mt-4 text-center">
+              <input type="password" id="inputPassword" class="form-control validate white-text" placeholder="Nhập password">
+              <!-- <div class="form-group mt-4 text-center">
                 <input class="form-check-input" type="checkbox" id="checkbox624">
                 <label for="checkbox624" class="white-text form-check-label">Đồng ý<a href="#"
                     class="green-text font-weight-bold">
                     điều khoản của chúng tôi.</a></label>
-              </div>
+              </div> -->
             </div>
 
 
             <!--Grid row-->
-            <div class="row d-flex align-items-center mb-4">
+            <div class="row d-flex align-items-center mb-4 mt-2">
 
               <!--Grid column-->
-              <div class="text-center mb-3 col-md-12">
-                <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1" name="button" id="button">Đăng ký</button>
+              <div class="text-center mb-3 col-md-12 mt-2">
+                <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1" name="button" id="button" onclick="registerUser()">Đăng ký</button>
               </div>
               <!--Grid column-->
 
