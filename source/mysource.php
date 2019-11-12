@@ -26,7 +26,10 @@
       $sql = "SELECT Id, email, ho, ten, role FROM users WHERE email='$username' AND password='$hashed' LIMIT 1";
       $result = mysqli_query($link, $sql);
       $i = mysqli_num_rows($result);
-      
+
+      // $this->messageBox($username);
+      // $this->messageBox($password);
+
       if($i == 1){
         $row = mysqli_fetch_array($result);
         $ho = $row['ho'];
@@ -268,7 +271,7 @@
         }
       }
 
-      $des = "../images/sanpham/" . $Id;
+      $des = "images/sanpham/" . $Id;
      
       if(!is_dir($des)){
        mkdir($des); 
@@ -291,7 +294,7 @@
       $sql = "DELETE FROM hinhanh WHERE Idsanpham='$Id'";
       $output .= $this->executeSql($sql);
       $sql = "DELETE FROM sanpham WHERE Id='$Id'";
-      $des = "../images/sanpham/" . $Id;
+      $des = "images/sanpham/" . $Id;
       $output .= $this->executeSql($sql);
 
       //xóa ảnh và folder của ảnh

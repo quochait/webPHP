@@ -1,5 +1,5 @@
 <?php
-  include "../source/mysource.php";
+  include "source/mysource.php";
   $p = new database();
 ?>
 
@@ -16,12 +16,12 @@
   <title>Rose</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="../css/font.css">
-  <link href="../css/business-frontpage.css" rel="stylesheet">
+  <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/font.css">
+  <link href="css/business-frontpage.css" rel="stylesheet">
   <style>
     .same-height {
       height: 300px;
@@ -86,14 +86,12 @@
   </nav>
 
   <!-- Header -->
-  <header class="bg-primary py-5 mb-5">
+  <header class="masthead">
     <div class="container h-100">
       <div class="row h-100 align-items-center">
-        <div class="col-lg-12">
-          <h1 class="display-4 text-white mt-5 mb-2">Business Name or Tagline</h1>
-          <p class="lead mb-5 text-white-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non possimus ab
-            labore provident mollitia. Id assumenda voluptate earum corporis facere quibusdam quisquam iste ipsa cumque
-            unde nisi, totam quas ipsam.</p>
+        <div class="col-12 text-center">
+          <h1 class="font-weight-light">Vertically Centered Masthead Content</h1>
+          <p class="lead">A great starter layout for a landing page</p>
         </div>
       </div>
     </div>
@@ -134,11 +132,9 @@
 
   </div>
 
-  <!-- Footer -->
-  <footer class="page-footer font-small bg-dark text-white pt-3">
-
-    <!-- Footer Links -->
-    <div class="container text-center text-md-left">
+  
+  <footer class="py-5 bg-dark">
+     <div class="container text-center text-md-left">
 
       <!-- Grid row -->
       <div class="row mt-3">
@@ -147,9 +143,9 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 text-center">
 
           <!-- Content -->
-          <h6 class="text-uppercase font-weight-bold">Rose</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Chuyên cung cấp các sản phẩm ....</p>
+          <h6 class="text-uppercase font-weight-bold text-white">Rose</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto text-white" style="width: 60px;">
+          <p class="text-white">Chuyên cung cấp các sản phẩm ....</p>
 
         </div>
         <!-- Grid column -->
@@ -158,7 +154,7 @@
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
 
           <!-- Links -->
-          <h6 class="text-uppercase font-weight-bold">Sản phẩm</h6>
+          <h6 class="text-uppercase font-weight-bold text-white">Sản phẩm</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
             <a href="?filter=Son" class="font-weight-bold">Son</a>
@@ -178,20 +174,19 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
           <!-- Links -->
-          <h6 class="text-uppercase font-weight-bold">Liên hệ</h6>
+          <h6 class="text-uppercase font-weight-bold text-white">Liên hệ</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
+          <p class="text-white">
             <i class="fas fa-home"></i> 12 Nguyễn Văn Bảo, Quận Gò Vấp, Thành phố Hồ Chí Minh</p>
-          <p>
+          <p class="text-white">
             <i class="fas fa-envelope"></i> tuongvi@gmail.com</p>
-          <p>
+          <p class="text-white">
             <i class="fas fa-address-book"></i> 094....</p>
         </div>
         <!-- Grid column -->
       </div>
       <!-- Grid row -->
     </div>
-    <!-- Footer Links -->
   </footer>
   <!-- Footer -->
 
@@ -363,9 +358,9 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="https://use.fontawesome.com/75139a0ae0.js"></script>
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/business-script.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="js/business-script.js"></script>
   
 </body>
 

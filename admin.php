@@ -1,5 +1,5 @@
 <?php
-  include '../source/mysource.php';
+  include 'source/mysource.php';
   $p = new database();
   session_start();
   $p->checkAdmin();
@@ -19,11 +19,11 @@
   <title>Rose Admin</title>
 
   <!-- Custom fonts for this template-->
-  <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="../css/font.css">
+  <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/font.css">
 
   <!-- Custom styles for this template-->
-  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <style>
     .same-height {
       height: 300px;
@@ -303,19 +303,19 @@
  
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../js/sb-admin-2.min.js"></script>
+  <script src="js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
   
-  <script src="../js/admin_script.js"></script>
+  <script src="js/admin_script.js"></script>
   
 </body>
 
